@@ -56,7 +56,7 @@ seed = [
       ]
 
 seed.each do |gif|
-  puts "Generating #{gif[:author]}'s gif..."
+  puts "Generating user #{gif[:user_id]}'s gif..."
   new_gif = Gif.create(tags: gif[:tags], image: gif[:image], user_id: rand(1..5), collected: gif[:collected])
   puts "Generating a collection with Gif: #{new_gif.id}..."
   Collection.create(user_id: new_gif.user_id, gif_id: new_gif.id)
