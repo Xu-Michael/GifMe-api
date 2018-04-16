@@ -1,1 +1,1 @@
-json.extract! @gif, :id, :tags, :author, :image, :collected
+json.extract! @gif, :id, :tags, :user_id, :image, :collected
