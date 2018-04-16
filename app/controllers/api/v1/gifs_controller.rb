@@ -1,6 +1,8 @@
 class Api::V1::GifsController < Api::V1::BaseController
   def index
     @gifs = Gif.all
+    @gifs_by_collections = @gifs.sort_by { |gif| -gif.collection_count }
+    @gifs_by_new = @gifs.order("#{:created_at} DESC")
   end
 
   def show
