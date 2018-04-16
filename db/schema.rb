@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180408073502) do
+ActiveRecord::Schema.define(version: 20180416054050) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,18 +27,21 @@ ActiveRecord::Schema.define(version: 20180408073502) do
   create_table "gifs", force: :cascade do |t|
     t.string "tags"
     t.string "image"
-    t.string "author"
     t.integer "collected", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_gifs_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "avatar"
   end
 
   add_foreign_key "collections", "gifs"
   add_foreign_key "collections", "users"
+  add_foreign_key "gifs", "users"
 end
