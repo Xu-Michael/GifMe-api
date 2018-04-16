@@ -7,4 +7,12 @@ class Gif < ApplicationRecord
   def collection_count
     Collection.where(gif_id: id).count
   end
+
+  def user_name
+    user.name
+  end
+
+  def user_avatar
+    user.avatar
+  end
 end
