@@ -40,9 +40,9 @@ class Api::V1::GifsController < Api::V1::BaseController
     # # file = File.open("#{path_for_gif}.gif", 'r')
     # # response = TencentCloudCos.put(file, "https://gifme-1256511506.cos.ap-shanghai.myqcloud.com/#{Gif.last.id + 1}.gif")
     # client.api.upload('/gifs', "#{Gif.last.id + 1}.gif", "#{path_for_gif}.gif")
-
     @gif = Gif.new(gif_params)
-    @gif.image = "#{path_for_gif}.gif";
+    @gif.image = "http://localhost:3000/#{path_for_gif}.gif";
+    @gif.tag_list = "rihanna"
     if @gif.save
       render :show, status: :created
     else
@@ -59,7 +59,7 @@ class Api::V1::GifsController < Api::V1::BaseController
   private
 
   def gif_params
-    params.require(:gif).permit(:tags, :image, :user_id)
+    params.require(:gif).permit(:image, :user_id)
   end
 
   def render_error
