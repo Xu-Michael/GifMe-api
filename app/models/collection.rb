@@ -10,4 +10,8 @@ class Collection < ApplicationRecord
   def user_avatar
     user.avatar
   end
+
+  def gif_collection_count
+    Collection.where(gif_id: gif.id).count
+  end
 end
