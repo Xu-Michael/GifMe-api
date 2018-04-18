@@ -42,7 +42,7 @@ class Api::V1::GifsController < Api::V1::BaseController
     # client.api.upload('/gifs', "#{Gif.last.id + 1}.gif", "#{path_for_gif}.gif")
 
     @gif = Gif.new(gif_params)
-    @gif.image = 'https://gifme-1256511506.cos.ap-shanghai.myqcloud.com/' + path_for_gif;
+    @gif.image = "#{path_for_gif}.gif";
     if @gif.save
       render :show, status: :created
     else
