@@ -48,10 +48,37 @@ seed.each do |gif|
   Collection.create(user_id: new_gif.user_id, gif_id: new_gif.id)
 end
 
-Gif.find(1).tag_list = "secret, gossip, shh"
-Gif.find(2).tag_list = "funny, laugh, flash"
-Gif.find(3).tag_list = "funny, trump, shake"
-Gif.find(4).tag_list = "cat, typing, funny"
-Gif.find(5).tag_list = "cat, funny, money"
-Gif.find(6).tag_list = "baby, funny, spoon"
-Gif.find(7).tag_list = "dog, dance, funny"
+a = Gif.find(1)
+a.tag_list = "secret, gossip, shh"
+a.save
+puts "1. tag list = #{a.tag_list}"
+
+b = Gif.find(2)
+b.tag_list = "funny, laugh, flash"
+b.save
+puts "2. tag list = #{b.tag_list}"
+
+c = Gif.find(3)
+c.tag_list = "funny, trump, shake"
+c.save
+puts "3. tag list = #{c.tag_list}"
+
+d = Gif.find(4)
+d.tag_list = "cat, typing, funny"
+d.save
+puts "4. tag list = #{d.tag_list}"
+
+e = Gif.find(5)
+e.tag_list = "cat, funny, money"
+e.save
+puts "5. tag list = #{e.tag_list}"
+
+f = Gif.find(6)
+f.tag_list = "baby, funny, spoon"
+f.save
+puts "6. tag list = #{f.tag_list}"
+
+g = Gif.find(7)
+g.tag_list = "dog, dance, funny"
+g.save
+puts "7. tag list = #{g.tag_list}"
