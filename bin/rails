@@ -7,5 +7,3 @@ end
 APP_PATH = File.expand_path('../config/application', __dir__)
 require_relative '../config/boot'
 require 'rails/commands'
-RAILS_ENV=production rake db:drop DISABLE_DATABASE_ENVIRONMENT_CHECK=1
-RAILS_ENV=production rake db:reset DISABLE_DATABASE_ENVIRONMENT_CHECK=1 
