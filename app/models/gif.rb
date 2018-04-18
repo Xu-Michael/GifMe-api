@@ -1,6 +1,6 @@
 class Gif < ApplicationRecord
 
-  HOST = ENV['HOST'] || "http://localhost:3000"
+  HOST = Rails.env.production? ? "https://gifme-api.wogengapp.cn" : "http://localhost:3000"
   PATH = "saved_gifs"
 
   has_many :collections
