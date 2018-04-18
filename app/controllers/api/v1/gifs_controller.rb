@@ -33,21 +33,18 @@ class Api::V1::GifsController < Api::V1::BaseController
     #   protocol:   'https' # 使用https
     # })
 
-    path_for_gif = "app/assets/#{Gif.last.id + 1}"
-    `ffmpeg -i #{gif_params[:image]} -filter_complex "fps=10,scale=-1:320,crop=ih:ih,setsar=1,palettegen" app/assets/palette#{Gif.last.id + 1}.png`
-    `ffmpeg -i #{gif_params[:image]} -i app/assets/palette#{Gif.last.id + 1}.png -filter_complex "[0]fps=10,scale=-1:340,crop=ih:ih,setsar=1[x];[x][1:v]paletteuse" #{path_for_gif}.gif`
-
+    @gif = Gif.create(gif_params)
+    @gif.convert!
     # # file = File.open("#{path_for_gif}.gif", 'r')
     # # response = TencentCloudCos.put(file, "https://gifme-1256511506.cos.ap-shanghai.myqcloud.com/#{Gif.last.id + 1}.gif")
     # client.api.upload('/gifs', "#{Gif.last.id + 1}.gif", "#{path_for_gif}.gif")
-    @gif = Gif.new(gif_params)
-    @gif.image = "http://localhost:3000/#{path_for_gif}.gif";
-    @gif.tag_list = "rihanna"
-    if @gif.save
-      render :show, status: :created
-    else
-      render_error
-    end
+
+    # Cloudinary::Uploader.upload("http://www.example.com/sample.jpg")
+
+    # @gif.tag_list = "rihanna"
+    puts @gif.gif_url
+    @gif.update(image: @gif.gif_url)
+    render :show, status: :created
   end
 
   def destroy
@@ -59,7 +56,7 @@ class Api::V1::GifsController < Api::V1::BaseController
   private
 
   def gif_params
-    params.require(:gif).permit(:image, :user_id)
+    params.require(:gif).permit(:video, :user_id)
   end
 
   def render_error
