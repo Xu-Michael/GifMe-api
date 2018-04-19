@@ -24,7 +24,6 @@ class Gif < ApplicationRecord
     `ffmpeg -i #{video} -i #{palette_path} -filter_complex "[0]fps=10,scale=-1:340,crop=ih:ih,setsar=1[x];[x][1:v]paletteuse" #{gif_path}`
   end
 
-
   def palette_path
     "public/#{PATH}/palette#{id}.png"
   end
