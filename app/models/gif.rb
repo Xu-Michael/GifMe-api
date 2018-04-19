@@ -20,8 +20,8 @@ class Gif < ApplicationRecord
   end
 
   def convert!
-    `ffmpeg -i #{video} -filter_complex "fps=5,scale=-1:250,crop=ih:ih,setsar=1,palettegen" #{palette_path}`
-    `ffmpeg -i #{video} -i #{palette_path} -filter_complex "[0]fps=10,scale=-1:250,crop=ih:ih,setsar=1[x];[x][1:v]paletteuse" #{gif_path}`
+    `ffmpeg -i #{video} -filter_complex "fps=8,scale=-1:320,setsar=1,palettegen" #{palette_path}`
+    `ffmpeg -i #{video} -i #{palette_path} -filter_complex "[0]fps=10,scale=-1:340,setsar=1[x];[x][1:v]paletteuse" #{gif_path}`
   end
 
 
