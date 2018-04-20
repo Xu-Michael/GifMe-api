@@ -4,14 +4,18 @@ class Collection < ApplicationRecord
   validates_uniqueness_of :gif_id, :scope => [ :user_id ]
 
   def user_name
-    user.name
+    gif.user_name
   end
 
   def user_avatar
-    user.avatar
+    gif.user_avatar
   end
 
   def gif_collection_count
     Collection.where(gif_id: gif.id).count
+  end
+
+  def tag_list
+    gif.tag_list
   end
 end
