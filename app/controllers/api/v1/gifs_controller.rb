@@ -16,7 +16,8 @@ class Api::V1::GifsController < Api::V1::BaseController
 
   def update
     @gif = Gif.find(params[:id])
-    if @gif.update(gif_params)
+    if @gif.tag_list = tag_params[:tags]
+      @gif.save
       render :show
     else
       render_error
@@ -24,29 +25,9 @@ class Api::V1::GifsController < Api::V1::BaseController
   end
 
   def create
-    # TencentCloudCos.configure do |config|
-    #   config.app_id     = '1256511506'
-    #   config.secret_id  = 'AKID1wgFi1FEYnsmV448h7MRL4proeMwPuMe'
-    #   config.secret_key = 'OcmpMn4B7sTt8CEAXozza6SiolYcVKPP'
-    #   config.host       = 'gifme-1256511506.cos.ap-shanghai.myqcloud.com'
-    # end
-    # client = COS::Client.new({
-    #   app_id:     '1256511506',
-    #   secret_id:  'AKID1wgFi1FEYnsmV448h7MRL4proeMwPuMe',
-    #   secret_key: 'OcmpMn4B7sTt8CEAXozza6SiolYcVKPP',
-    #   default_bucket: 'gifme-1256511506',
-    #   protocol:   'https' # 使用https
-    # })
-
     @gif = Gif.create(gif_params)
     @gif.convert!
-    # # file = File.open("#{path_for_gif}.gif", 'r')
-    # # response = TencentCloudCos.put(file, "https://gifme-1256511506.cos.ap-shanghai.myqcloud.com/#{Gif.last.id + 1}.gif")
-    # client.api.upload('/gifs', "#{Gif.last.id + 1}.gif", "#{path_for_gif}.gif")
 
-    # Cloudinary::Uploader.upload("http://www.example.com/sample.jpg")
-
-    # @gif.tag_list = "rihanna"
     puts @gif.gif_url
     @gif.update(image: @gif.gif_url)
     render :show, status: :created
@@ -62,6 +43,10 @@ class Api::V1::GifsController < Api::V1::BaseController
 
   def gif_params
     params.require(:gif).permit(:video, :user_id)
+  end
+
+  def tag_params
+    params.permit(:tags)
   end
 
   def render_error
