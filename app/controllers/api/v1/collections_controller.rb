@@ -8,12 +8,16 @@ class Api::V1::CollectionsController < Api::V1::BaseController
     @user = User.find(params[:user_id])
     @gif = Gif.find(params[:gif_id])
     @collection = Collection.new(collection_params)
-    @collection.gif = @gif
-    @collection.user = @user
-    if @collection.save
-      render :index, status: :created
+    if Collection.where(gif_id: @gif.id, user_id: @user.id).exists?
+      Collection.find_by(gif_id: @gif.id, user_id: @user.id).destroy
     else
-      render_error
+      @collection.gif = @gif
+      @collection.user = @user
+      if @collection.save
+        render :index, status: :created
+      else
+        render_error
+      end
     end
   end
 
