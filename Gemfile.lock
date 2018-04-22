@@ -49,6 +49,10 @@ GEM
       sass (>= 3.3.4)
     builder (3.2.3)
     byebug (10.0.2)
+    carrierwave (1.2.2)
+      activemodel (>= 4.0.0)
+      activesupport (>= 4.0.0)
+      mime-types (>= 1.16)
     coderay (1.1.2)
     concurrent-ruby (1.0.5)
     crass (1.0.3)
@@ -103,6 +107,7 @@ GEM
       pry (>= 0.10.4)
     puma (3.11.3)
     rack (2.0.4)
+    rack-cors (1.0.2)
     rack-test (1.0.0)
       rack (>= 1.0, < 3)
     rails (5.1.6)
@@ -192,6 +197,7 @@ DEPENDENCIES
   acts-as-taggable-on (~> 5.0)
   autoprefixer-rails
   bootstrap-sass (~> 3.3)
+  carrierwave
   faker
   figaro
   font-awesome-sass (~> 4.7)
@@ -201,6 +207,7 @@ DEPENDENCIES
   pry-byebug
   pry-rails
   puma
+  rack-cors
   rails (= 5.1.6)
   redis
   responders
