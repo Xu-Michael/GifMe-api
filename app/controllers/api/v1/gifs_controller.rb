@@ -28,7 +28,7 @@ class Api::V1::GifsController < Api::V1::BaseController
     @gif = Gif.create(gif_params)
     @gif.convert!
     @gif.update(image: @gif.gif_url)
-    render :show, status: :created
+    render json: @gif.id
   end
 
   def destroy
