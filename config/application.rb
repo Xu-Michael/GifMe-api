@@ -13,7 +13,7 @@ module GifMeApi
       generate.helper false
       generate.test_framework  :test_unit, fixture: false
     end
-    config.middleware.insert_before 0, "Rack::Cors" do
+    config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins '*'
         resource '*', :headers => :any, :methods => [:get, :post, :options]
