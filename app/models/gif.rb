@@ -6,7 +6,7 @@ class Gif < ApplicationRecord
   HOST = Rails.env.production? ? "https://gifme-api.wogengapp.cn" : "http://localhost:3000"
   PATH = "saved_gifs"
 
-  has_many :collections
+  has_many :collections, dependent: :destroy
   belongs_to :user
   acts_as_taggable_on :tags
   mount_uploader :video, ClipUploader
