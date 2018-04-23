@@ -27,10 +27,8 @@ class Api::V1::GifsController < Api::V1::BaseController
   def create
     @gif = Gif.create(gif_params)
     @gif.convert!
-
-    puts @gif.gif_url
     @gif.update(image: @gif.gif_url)
-    render :show, status: :created
+    render json: @gif.id
   end
 
   def destroy
@@ -42,7 +40,7 @@ class Api::V1::GifsController < Api::V1::BaseController
   private
 
   def gif_params
-    params.require(:gif).permit(:video, :user_id)
+    params.permit(:video, :user_id)
   end
 
   def tag_params
