@@ -1,5 +1,4 @@
 require 'qiniu'
-require 'pry-byebug'
 
 class Gif < ApplicationRecord
 
