@@ -18,6 +18,14 @@ class Gif < ApplicationRecord
     user.name
   end
 
+  def collected?
+    Collection.where(user_id: user_id, gif_id: id).exists?
+  end
+  
+  def collected
+    @collected
+  end
+
   def user_avatar
     user.avatar
   end
