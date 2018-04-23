@@ -26,8 +26,10 @@ class Api::V1::GifsController < Api::V1::BaseController
 
   def create
     @gif = Gif.create(gif_params)
+    @gif.upload(@gif.video.filename, "uploads/gif/video")
     @gif.convert!
-    @gif.update(image: @gif.gif_url)
+    @gif.upload("#{@gif.id}.gif", "saved_gifs")
+    @gif.update(image: "http://p7hewqcmm.bkt.clouddn.com/#{@gif.id}.gif", video: "http://p7hewqcmm.bkt.clouddn.com/#{@gif.video.filename}")
     render json: @gif.id
   end
 
