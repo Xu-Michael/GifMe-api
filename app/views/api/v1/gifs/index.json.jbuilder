@@ -21,4 +21,3 @@ json.gifs_by_new do
     json.collected gif.collectors.find_by_id(@user_id).present? if @user_id
   end
 end
-
