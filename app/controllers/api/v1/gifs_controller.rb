@@ -7,6 +7,7 @@ class Api::V1::GifsController < Api::V1::BaseController
       @gifs_by_collections = @gifs.sort_by { |gif| -gif.collection_count }
       @gifs_by_new = @gifs.order("#{:created_at} DESC")
     end
+    @user_id = params[:user_id]
     @top_ten_tags = ActsAsTaggableOn::Tag.most_used(10)
   end
 

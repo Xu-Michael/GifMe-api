@@ -7,6 +7,7 @@ class Gif < ApplicationRecord
 
   has_many :collections, dependent: :destroy
   belongs_to :user
+  has_many :collectors, through: :collections, source: :gif
   acts_as_taggable_on :tags
   mount_uploader :video, ClipUploader
 
