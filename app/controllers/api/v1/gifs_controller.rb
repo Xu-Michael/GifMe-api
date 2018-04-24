@@ -26,7 +26,9 @@ class Api::V1::GifsController < Api::V1::BaseController
   end
 
   def create
-    @gif = Gif.create(gif_params)
+    @gif = Gif.new(video_upload: gif_params[:video_upload], user_id: gif_params[:user_id])
+    @gif.tag_list = gif_params[:tags]
+    @gif.save!
     @gif.convert!
     @gif.update(image: @gif.gif_url, video: @gif.video_url)
     # @gif.upload(@gif.video.filename, "uploads/gif/video")
@@ -44,11 +46,7 @@ class Api::V1::GifsController < Api::V1::BaseController
   private
 
   def gif_params
-    params.permit(:video_upload, :user_id)
-  end
-
-  def tag_params
-    params.permit(:tags)
+    params.permit(:video_upload, :user_id, :tags)
   end
 
   def render_error
