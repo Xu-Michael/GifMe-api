@@ -1,6 +1,6 @@
 class Collection < ApplicationRecord
   belongs_to :user
-  belongs_to :gif
+  belongs_to :gif, dependent: :destroy
   validates_uniqueness_of :gif_id, :scope => [ :user_id ]
 
   def user_name
