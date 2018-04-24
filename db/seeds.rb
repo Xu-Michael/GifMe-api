@@ -20,60 +20,62 @@ puts "Generated user #{user.name}"
 
 seed = [
         {
-          "id": 1,
-          "image": "https://media.giphy.com/media/kYTPMpeT4FQcM/giphy.gif",
-          "video": "http://p7hewqcmm.bkt.clouddn.com/ezgif.com-crop.mp4"
+          id: 1,
+          image: "https://media.giphy.com/media/kYTPMpeT4FQcM/giphy.gif",
+          video: "http://p7hewqcmm.bkt.clouddn.com/ezgif.com-crop.mp4"
         },
         {
-          "id": 2,
-          "image": "https://media.giphy.com/media/3oEdv898CETgzT5vxu/giphy.gif",
-          "video": "http://p7hewqcmm.bkt.clouddn.com/ezgif.com-gif-to-mp4.mp4"
+          id: 2,
+          image: "https://media.giphy.com/media/3oEdv898CETgzT5vxu/giphy.gif",
+          video: "http://p7hewqcmm.bkt.clouddn.com/ezgif.com-gif-to-mp4.mp4"
         },
         {
-          "id": 3,
-          "image": "https://media.giphy.com/media/3oEjI7M0cOXG0j4HWU/giphy.gif",
-          "video": "http://p7hewqcmm.bkt.clouddn.com/ezgif.com-gif-to-mp4%20%281%29.mp4"
+          id: 3,
+          image: "https://media.giphy.com/media/3oEjI7M0cOXG0j4HWU/giphy.gif",
+          video: "http://p7hewqcmm.bkt.clouddn.com/ezgif.com-gif-to-mp4%20%281%29.mp4"
         },
         {
-          "id": 4,
-          "image": "https://media.giphy.com/media/kMdlyJ74u9khW/giphy.gif",
-          "video": "http://p7hewqcmm.bkt.clouddn.com/ezgif.com-gif-to-mp4%20%282%29.mp4"
+          id: 4,
+          image: "https://media.giphy.com/media/kMdlyJ74u9khW/giphy.gif",
+          video: "http://p7hewqcmm.bkt.clouddn.com/ezgif.com-gif-to-mp4%20%282%29.mp4"
         },
         {
-          "id": 5,
-          "image": "https://media.giphy.com/media/51Uiuy5QBZNkoF3b2Z/giphy.gif",
-          "video": "http://p7hewqcmm.bkt.clouddn.com/ezgif.com-gif-to-mp4%20%283%29.mp4"
+          id: 5,
+          image: "https://media.giphy.com/media/51Uiuy5QBZNkoF3b2Z/giphy.gif",
+          video: "http://p7hewqcmm.bkt.clouddn.com/ezgif.com-gif-to-mp4%20%283%29.mp4"
         },
         {
-          "id": 6,
-          "image": "https://media.giphy.com/media/CCcSD7rlc0DoQ/giphy.gif",
-          "video": "http://p7hewqcmm.bkt.clouddn.com/ezgif.com-gif-to-mp4%20%284%29.mp4"
+          id: 6,
+          image: "https://media.giphy.com/media/CCcSD7rlc0DoQ/giphy.gif",
+          video: "http://p7hewqcmm.bkt.clouddn.com/ezgif.com-gif-to-mp4%20%284%29.mp4"
         },
         {
-          "id": 7,
-          "image": "https://media.giphy.com/media/3o7abCJnPhzwYzbvDW/giphy.gif",
-          "video": "http://p7hewqcmm.bkt.clouddn.com/ezgif.com-gif-to-mp4%20%285%29.mp4"
+          id: 7,
+          image: "https://media.giphy.com/media/3o7abCJnPhzwYzbvDW/giphy.gif",
+          video: "http://p7hewqcmm.bkt.clouddn.com/ezgif.com-gif-to-mp4%20%285%29.mp4"
         },
         {
-          "id": 8,
-          "image": "https://media.giphy.com/media/zCln43mMti1UI/giphy.gif",
-          "video": "http://p7hewqcmm.bkt.clouddn.com/ezgif.com-gif-to-mp4%20%286%29.mp4"
+          id: 8,
+          image: "https://media.giphy.com/media/zCln43mMti1UI/giphy.gif",
+          video: "http://p7hewqcmm.bkt.clouddn.com/ezgif.com-gif-to-mp4%20%286%29.mp4"
         },
         {
-          "id": 9,
-          "image": "https://media.giphy.com/media/ZUOlQXqO0qbAI/giphy.gif",
-          "video": "http://p7hewqcmm.bkt.clouddn.com/ezgif.com-gif-to-mp4%20%287%29.mp4"
+          id: 9,
+          image: "https://media.giphy.com/media/ZUOlQXqO0qbAI/giphy.gif",
+          video: "http://p7hewqcmm.bkt.clouddn.com/ezgif.com-gif-to-mp4%20%287%29.mp4"
         },
         {
-          "id": 10,
-          "image": "https://media.giphy.com/media/nsxtyVrqgYef6/giphy.gif",
-          "video": "http://p7hewqcmm.bkt.clouddn.com/ezgif.com-gif-to-mp4%20%288%29.mp4"
+          id: 10,
+          image: "https://media.giphy.com/media/nsxtyVrqgYef6/giphy.gif",
+          video: "http://p7hewqcmm.bkt.clouddn.com/ezgif.com-gif-to-mp4%20%288%29.mp4"
         }
       ]
 
 seed.each do |gif|
   puts "Generating user #{gif[:user_id]}'s gif..."
-  new_gif = Gif.create(image: gif[:image], video: gif[:video], user_id: User.all.sample.id)
+  new_gif = Gif.new(image: gif[:image], user_id: User.all.sample.id)
+  new_gif.write_attribute(:video, gif[:video])
+  new_gif.save!
   puts "Generating a collection with Gif: #{new_gif.id}..."
   Collection.create(user_id: new_gif.user_id, gif_id: new_gif.id)
 end
