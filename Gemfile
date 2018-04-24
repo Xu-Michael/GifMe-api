@@ -19,6 +19,8 @@ gem 'faker'
 gem 'acts-as-taggable-on', '~> 5.0'
 gem 'carrierwave'
 gem 'qiniu', '~> 6.8.1'
+gem 'sidekiq'
+gem 'sidekiq-failures', '~> 1.0'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
