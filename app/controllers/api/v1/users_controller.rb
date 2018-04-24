@@ -14,6 +14,7 @@ class Api::V1::UsersController < Api::V1::BaseController
   def show
     # @users = policy_scope(User)
     @user = User.find(params[:id])
+    @current_user_id = params[:current_user_id]
     @users_gifs = Gif.where(user_id: @user.id).order("#{:created_at} DESC")
   end
 
