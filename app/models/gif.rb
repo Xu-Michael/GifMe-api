@@ -7,7 +7,7 @@ class Gif < ApplicationRecord
 
   has_many :collections, dependent: :destroy
   belongs_to :user
-  has_many :collectors, through: :collections, source: :gif
+  has_many :collectors, through: :collections, source: :user
   acts_as_taggable_on :tags
   mount_uploader :video, ClipUploader
 
@@ -22,7 +22,7 @@ class Gif < ApplicationRecord
   def collected?
     Collection.where(user_id: user_id, gif_id: id).exists?
   end
-  
+
   def collected
     @collected
   end
