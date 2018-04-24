@@ -73,7 +73,7 @@ seed = [
 
 seed.each do |gif|
   puts "Generating user #{gif[:user_id]}'s gif..."
-  new_gif = Gif.create(image: gif[:image], user_id: User.all.sample.id)
+  new_gif = Gif.create(image: gif[:image], video: gif[:video], user_id: User.all.sample.id)
   puts "Generating a collection with Gif: #{new_gif.id}..."
   Collection.create(user_id: new_gif.user_id, gif_id: new_gif.id)
 end
