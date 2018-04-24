@@ -28,7 +28,7 @@ class Api::V1::GifsController < Api::V1::BaseController
   def create
     @gif = Gif.create(gif_params)
     @gif.convert!
-    @gif.update(image: @gif.gif_url)
+    @gif.update(image: @gif.gif_url, video: @gif.video_url)
     # @gif.upload(@gif.video.filename, "uploads/gif/video")
     # @gif.upload("#{@gif.id}.gif", "saved_gifs")
     # @gif.update(image: "http://p7hewqcmm.bkt.clouddn.com/#{@gif.id}.gif", video: "http://p7hewqcmm.bkt.clouddn.com/#{@gif.video.filename}")
@@ -44,7 +44,7 @@ class Api::V1::GifsController < Api::V1::BaseController
   private
 
   def gif_params
-    params.permit(:video, :user_id)
+    params.permit(:video_upload, :user_id)
   end
 
   def tag_params
