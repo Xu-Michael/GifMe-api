@@ -12,9 +12,10 @@ class Api::V1::CollectionsController < Api::V1::BaseController
     @collection = Collection.new(collection_params)
     if Collection.where(gif_id: @gif.id, user_id: @user.id).exists?
       Collection.find_by(gif_id: @gif.id, user_id: @user.id).destroy
+      render :show, status: :accepted
     else
       if @collection.save
-        render json: @collection, status: :created
+        render :show,  status: :create
       else
         render_error
       end
@@ -26,9 +27,10 @@ class Api::V1::CollectionsController < Api::V1::BaseController
   end
 
   def destroy
-    @collection = Collection.find(params[:id])
-    @collection.destroy
-    head :no_content
+    @user = User.find(collection_params[:user_id])
+    @gif = Gif.find(collection_params[:gif_id])
+    Collection.find_by(gif_id: @gif.id, user_id: @user.id).destroy
+    render :show
   end
 
   private
