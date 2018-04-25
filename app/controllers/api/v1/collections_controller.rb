@@ -21,6 +21,10 @@ class Api::V1::CollectionsController < Api::V1::BaseController
     end
   end
 
+  def show
+    @collection = Collection.find(params[:id])
+  end
+
   def destroy
     @collection = Collection.find(params[:id])
     @collection.destroy

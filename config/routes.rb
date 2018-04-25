@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :gifs, only: [ :index, :show, :update, :create, :destroy ]
       resources :users, only: [ :index, :show, :create ] do
-        resources :collections, only: [ :index, :create, :destroy ]
+        resources :collections, only: [ :index, :create, :show, :destroy ]
       end
     end
   end
