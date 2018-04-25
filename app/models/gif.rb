@@ -67,7 +67,7 @@ class Gif < ApplicationRecord
       # 生成上传 Token
       uptoken = Qiniu::Auth.generate_uptoken(put_policy)
       # 要上传文件的本地路径
-      filePath = "#{path}#{file_name}"
+      filePath = "public/#{path}/#{file_name}"
       # 调用 upload_with_token_2 方法上传
       code, result, response_headers = Qiniu::Storage.upload_with_token_2(
            uptoken,

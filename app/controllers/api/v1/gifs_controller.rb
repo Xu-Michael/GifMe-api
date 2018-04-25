@@ -26,11 +26,14 @@ class Api::V1::GifsController < Api::V1::BaseController
   end
 
   def create
-    @gif = Gif.new(video_upload: gif_params[:video_upload], user_id: gif_params[:user_id])
+    @gif = Gif.create(video_upload: gif_params[:video_upload], user_id: gif_params[:user_id])
     @gif.tag_list = gif_params[:tags]
+    # @gif.upload(@gif.video.filename, "uploads/gif/video")
     @gif.save!
     @gif.convert!
-    @gif.update(image: @gif.gif_url, video: @gif.video_url)
+    @gif.upload("#{@gif.id}.gif", "saved_gifs")
+    @gif.update(image: "http://p7hewqcmm.bkt.clouddn.com/#{@gif.id}.gif", video: @gif.video_url)
+    # @gif.update(image: @gif.gif_url, video: @gif.video_url)
     render json: @gif.id
   end
 
