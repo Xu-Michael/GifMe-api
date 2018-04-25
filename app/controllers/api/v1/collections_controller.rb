@@ -36,7 +36,7 @@ class Api::V1::CollectionsController < Api::V1::BaseController
   private
 
   def collection_params
-    params.require(:collection).permit(:user_id, :gif_id)
+    params.require(:collection)
   end
 
   def render_error
