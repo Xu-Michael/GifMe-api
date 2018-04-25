@@ -32,8 +32,8 @@ class Gif < ApplicationRecord
   end
 
   def convert!
-    `ffmpeg -i public#{video_upload} -filter_complex "fps=10,scale=-1:320,crop=ih:ih,setsar=1,palettegen" #{palette_path}`
-    `ffmpeg -i public#{video_upload} -i #{palette_path} -filter_complex "[0]fps=10,scale=-1:340,crop=ih:ih,setsar=1[x];[x][1:v]paletteuse" #{gif_path}`
+    `ffmpeg -i public#{video_upload} -filter_complex "fps=5,scale=-1:380,crop=ih:ih,setsar=1,palettegen" #{palette_path}`
+    `ffmpeg -i public#{video_upload} -i #{palette_path} -filter_complex "[0]fps=5,scale=-1:380,crop=ih:ih,setsar=1[x];[x][1:v]paletteuse" #{gif_path}`
   end
 
   def palette_path
